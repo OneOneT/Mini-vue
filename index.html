@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="module" src="./reactive.js"></script>
+  <script type="module" src="./render.js"></script>
+  <script type="module" src="./index.js"></script>
+  <script type="module">
+    import { h } from './render.js'
+    import { reactive } from './reactive.js'
+    import { createApp } from "./index.js"
+
+    const App = {
+      data: reactive({
+        counter: 100
+      }),
+      runder() {
+        return h("div", { class: "newbox" }, [
+          h("p", { class: "sings", id: "abc" }, "我是立白"),
+          h("p", { class: "text" }, `${this.data.counter}`),
+          h("button", {
+            onClick: () => {
+
+
+              this.data.counter++
+              console.log(this.data.counter);
+            }
+          }, "+1")
+        ])
+      }
+    }
+
+    const app = createApp(App)
+    app.mount("#app")
+
+  </script>
+
+</body>
+
+</html>
